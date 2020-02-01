@@ -74,4 +74,37 @@ public class YLinkedList {
             node = node.getNext();
         }
     }
+
+
+    /**
+     * 翻转结点 node 开始的链表
+     * 将4->3->2->1 翻转成 4-<3-<2-<1，并将head->4 改为 head->1
+     */
+    public void invertLinkedList() {
+        Node firNode = this.invertLinkedList(head.getNext());
+        head.setNext(firNode);
+    }
+
+    /**
+     * 递归翻转结点 node 开始的链表
+     * 将x->y-> 翻转成 y->x->null ，并返回第一个结点
+     *
+     * @param node
+     * @return
+     */
+    private Node invertLinkedList(Node node) {
+        if (node.getNext() == null) {
+            //当是尾结点时，返回尾结点到最顶层，需要重新设置head.next 等于尾结点
+            return node;
+        }
+
+        Node firNode = invertLinkedList(node.getNext());
+        //将x->y 翻转成x->y->x(这一步是个环状)
+        node.getNext().setNext(node);
+        //避免成环状,要将x->y 断掉,改为x->null
+        node.setNext(null);
+        //不断向上返回尾结点
+        return firNode;
+    }
+
 }
