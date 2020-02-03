@@ -77,7 +77,7 @@ public class YLinkedList {
 
 
     /**
-     * 翻转结点 node 开始的链表
+     * 递归翻转结点链表
      * 将4->3->2->1 翻转成 4-<3-<2-<1，并将head->4 改为 head->1
      */
     public void invertLinkedList() {
@@ -105,6 +105,31 @@ public class YLinkedList {
         node.setNext(null);
         //不断向上返回尾结点
         return firNode;
+    }
+
+    /**
+     * 迭代解法 翻转链表
+     * 将x->y-> 翻转成 y->x->null ，并返回第一个结点
+     */
+    public void iterationInvertLinkedList() {
+        //定义两个节点：pre, cur ，其中 cur 是 pre 的后继结点
+        Node preNode = head.getNext();
+        Node curNode = preNode.getNext();
+        preNode.setNext(null);
+
+        //注意，只有原本的第一个结点的后继结点才需要设置为null，所以不能用perNode作为循环开始，而是在上面就设置preNode.next为null
+        while (curNode != null) {
+            /**
+             * 务必注意：在 cur 指向 pre 之前一定要先保留 cur 的后继结点，不然 cur 指向 pre 后就再也找不到后继结点了
+             * 也就无法对 cur 后继之后的结点进行翻转了
+             */
+            Node nodeNext = curNode.getNext();
+            curNode.setNext(preNode);
+            preNode = curNode;
+            curNode = nodeNext;
+        }
+        //最后重新设置头结点的next
+        head.setNext(preNode);
     }
 
 }
