@@ -13,7 +13,7 @@ public class ChangeFirst {
         }
         yLinkedList.printList();
         System.out.println("翻转后");
-        yLinkedList.iterationInvertLinkedList(1, 3);
+        yLinkedList.iterationInvertLinkedList(0, 3);
         yLinkedList.printList();
     }
 }

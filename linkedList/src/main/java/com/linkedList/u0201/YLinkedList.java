@@ -140,16 +140,22 @@ public class YLinkedList {
      * @param toIndex
      */
     public void iterationInvertLinkedList(int fromIndex, int toIndex) {
-        int firNodePreIndex = fromIndex - 1;
         //fromIndex的前一个node，最后需要设置这个node的next为翻转后的第一个node，所以需要记录下来
-        Node firNodePreNode = head.getNext();
+        Node firNodePreNode = head;
         //fromIndex对应的node
         Node findFirNode = firNodePreNode.getNext();
-        //先找到fromIndex对应的那个node已经这个node的前一个node
-        while (firNodePreIndex > 0) {
-            findFirNode = findFirNode.getNext();
-            firNodePreIndex--;
+        if (fromIndex > 0) {
+            //如果非从头翻转，就要找到不断向下寻找到对应的那个Node
+            int firNodePreIndex = fromIndex - 1;
+            firNodePreNode = head.getNext();
+            findFirNode = firNodePreNode.getNext();
+            //先找到fromIndex对应的那个node已经这个node的前一个node
+            while (firNodePreIndex > 0) {
+                findFirNode = findFirNode.getNext();
+                firNodePreIndex--;
+            }
         }
+
 
         //开始翻转指定区间的链表
         Node preNode = findFirNode;
