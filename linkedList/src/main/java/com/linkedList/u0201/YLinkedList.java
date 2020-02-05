@@ -132,4 +132,42 @@ public class YLinkedList {
         head.setNext(preNode);
     }
 
+
+    /**
+     * 将链表指定区间的结点翻转，如 5->4->3->2->1,指定4~2翻转，结果为5->2->3->4->1
+     *
+     * @param fromIndex
+     * @param toIndex
+     */
+    public void iterationInvertLinkedList(int fromIndex, int toIndex) {
+        int firNodePreIndex = fromIndex - 1;
+        //fromIndex的前一个node，最后需要设置这个node的next为翻转后的第一个node，所以需要记录下来
+        Node firNodePreNode = head.getNext();
+        //fromIndex对应的node
+        Node findFirNode = firNodePreNode.getNext();
+        //先找到fromIndex对应的那个node已经这个node的前一个node
+        while (firNodePreIndex > 0) {
+            findFirNode = findFirNode.getNext();
+            firNodePreIndex--;
+        }
+
+        //开始翻转指定区间的链表
+        Node preNode = findFirNode;
+        Node curNode = findFirNode.getNext();
+        preNode.setNext(null);
+        //确定翻转的长度
+        int replaceLength = toIndex - fromIndex;
+        while (replaceLength > 0) {
+            Node nextNode = curNode.getNext();
+            curNode.setNext(preNode);
+            preNode = curNode;
+            curNode = nextNode;
+            replaceLength--;
+        }
+        //设置fromIndex 前一个 node的next为翻转后的第一个node
+        firNodePreNode.setNext(preNode);
+        //将fromIndex对应的node的next设置为翻转区间翻转前的最后一个node的next，这样才会把整个链表连接起来了
+        findFirNode.setNext(curNode);
+
+    }
 }
