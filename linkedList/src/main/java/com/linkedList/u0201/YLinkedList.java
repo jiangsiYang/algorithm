@@ -176,4 +176,28 @@ public class YLinkedList {
         findFirNode.setNext(curNode);
 
     }
+
+    public void iterationInvertLinkedListEveryK(int k) {
+        Node startNode = head.getNext();
+        Node endNode = head.getNext();
+
+        Node preNode = startNode;
+        Node curNode = endNode;
+        while (endNode != null) {
+            int step = 0;
+            while (step < k - 1) {
+                Node nextNode = curNode.getNext();
+                preNode.setNext(null);
+                curNode.setNext(preNode);
+
+                preNode = curNode;
+                curNode = nextNode;
+                step++;
+            }
+
+            endNode = endNode.getNext();
+        }
+
+
+    }
 }
