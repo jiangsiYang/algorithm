@@ -37,7 +37,7 @@ public class KMP {
         //tar 主串中将要匹配的位置
         int tar = 0;
         for (tar = 0; tar < n; tar++) {
-            // 不匹配时回溯
+            // 不匹配时回溯，这里也是个小循环，直到pos=0才跳出
             while (pos > 0 && text.charAt(tar) != pattern.charAt(pos)) {
                 pos = next[pos];
             }
