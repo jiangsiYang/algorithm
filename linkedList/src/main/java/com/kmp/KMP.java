@@ -106,7 +106,7 @@ public class KMP {
                 //这里不断地去缩减now的值，直到满足P[x] 与 P[now]
                 now = next[now - 1];
             } else {
-                //实在没有匹配的now 能满足 P[x]=P[now]
+                //实在没有匹配的now 能满足 P[x]=P[now] 此时now=0
                 x++;
                 next[x] = now;
             }
